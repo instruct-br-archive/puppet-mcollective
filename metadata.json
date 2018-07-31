@@ -1,0 +1,73 @@
+{
+  "name": "instruct-mcollective",
+  "version": "0.8.0",
+  "author": "Instruct",
+  "summary": "Esse módulo configura o MCollective Server e Cliente",
+  "license": "Apache-2.0",
+  "source": "git@gitlab.instruct.com.br:puppet/mcollective.git",
+  "project_page": "https://gitlab.instruct.com.br/puppet/mcollective",
+  "issues_url": "https://gitlab.instruct.com.br/puppet/mcollective/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.13.0 < 5.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7",
+        "6",
+        "5"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7",
+        "6",
+        "5"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7",
+        "6",
+        "5"
+      ]
+    },
+    {
+      "operatingsystem": "SLES",
+      "operatingsystemrelease": [
+        "12",
+        "11"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9",
+        "8",
+        "7",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "18.04",
+        "16.04",
+        "14.04",
+        "12.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.8.0 < 6.0.0"
+    }
+  ]
+}

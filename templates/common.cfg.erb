@@ -1,0 +1,52 @@
+main_collective = mcollective
+collectives = mcollective
+
+libdir = <%= @mco_libdir %>
+logfile = <%= @mco_logfile %>
+loglevel = <%= @mco_loglevel %>
+identity = <%= @mco_identity %>
+daemonize = 1
+direct_addressing = 1
+
+connector = <%= @broker_type %>
+<% size = @broker_pool_hosts.length %>
+plugin.<%= @broker_type %>.pool.size = <%= size %>
+<% @broker_pool_hosts.reverse.each do |h| -%>
+plugin.<%= @broker_type %>.pool.<%= size %>.host = <%= h %>
+plugin.<%= @broker_type %>.pool.<%= size %>.port = <%= @broker_pool_port %>
+plugin.<%= @broker_type %>.pool.<%= size %>.user = <%= @broker_pool_user %>
+plugin.<%= @broker_type %>.pool.<%= size %>.password = <%= @broker_pool_password %>
+plugin.<%= @broker_type %>.pool.<%= size %>.ssl = true
+plugin.<%= @broker_type %>.pool.<%= size %>.ssl.ca = <%= @broker_pool_ssl_ca %>
+plugin.<%= @broker_type %>.pool.<%= size %>.ssl.key = <%= @broker_pool_ssl_key %>
+plugin.<%= @broker_type %>.pool.<%= size %>.ssl.cert = <%= @broker_pool_ssl_cert %>
+<% size = size - 1 -%>
+<% end -%>
+
+plugin.<%= @broker_type %>.heartbeat_interval = 120
+plugin.<%= @broker_type %>.max_hbread_fails = 2
+plugin.<%= @broker_type %>.max_hbrlck_fails = 0
+
+<% if @broker_type == 'rabbitmq' -%>
+plugin.rabbitmq.vhost = /mcollective
+
+# Habilitar federacao
+# https://docs.puppet.com/mcollective/reference/plugins/connector_rabbitmq.html#federation
+plugin.rabbitmq.use_reply_exchange = true
+<% end -%>
+
+factsource = yaml
+plugin.yaml = <%= @mco_facts_yaml_path %>
+classesfile = <%= @mco_classesfile_path %>
+registerinterval = 600
+registration = Agentlist
+
+plugin.puppet.splay = true
+plugin.puppet.splaylimit = 120
+plugin.puppet.signal_daemon = 0
+plugin.puppet.command = <%= @puppet_command %>
+<% if @kernel == 'windows' -%>
+plugin.puppet.windows_service = puppet
+<% else -%>
+plugin.puppet.config = /etc/puppetlabs/puppet/puppet.conf
+<% end -%>

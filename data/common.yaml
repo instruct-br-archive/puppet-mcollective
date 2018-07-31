@@ -1,0 +1,6 @@
+---
+mcollective::broker_pool_hosts: ['localhost']
+mcollective::broker_pool_port: '34567'
+mcollective::broker_pool_user: 'mcollective'
+mcollective::broker_pool_password: 'aVeryLongPassword'
+mcollective::mco_loglevel: 'debug'
